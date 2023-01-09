@@ -7,7 +7,7 @@ const TodoItemSchema = new mongoose.Schema({
     type:String,
     required: true
   }
-})
+});
 
 //export this Schema
 module.exports = mongoose.model('todo', TodoItemSchema);
