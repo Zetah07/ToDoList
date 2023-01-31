@@ -14,7 +14,7 @@ function App() {
   const addItem = async (e) => {
     e.preventDefault();
     try{
-      const res = await axios.post('http://localhost:5500/api/item', {item: itemText})
+      const res = await axios.post('/item', {item: itemText})
       setListItems(prev => [...prev, res.data]);
       setItemText('');
     }catch(err){
@@ -26,7 +26,7 @@ function App() {
   useEffect(()=>{
     const getItemsList = async () => {
       try{
-        const res = await axios.get('http://localhost:5500/api/items')
+        const res = await axios.get('/items')
         setListItems(res.data);
         console.log('render')
       }catch(err){
@@ -39,7 +39,7 @@ function App() {
   // Eliminar elemento al hacer clic en eliminar
   const deleteItem = async (id) => {
     try{
-      const res = await axios.delete(`http://localhost:5500/api/item/${id}`)
+      const res = await axios.delete(`/item/${id}`)
       const newListItems = listItems.filter(item=> item._id !== id);
       console.log('👀 ~  file: App.js:43 ~  deleteItem ~  res', res);
       setListItems(newListItems);
@@ -52,7 +52,7 @@ function App() {
   const updateItem = async (e) => {
     e.preventDefault()
     try{
-      const res = await axios.put(`http://localhost:5500/api/item/${isUpdating}`, {item: updateItemText})
+      const res = await axios.put(`/item/${isUpdating}`, {item: updateItemText})
       console.log(res.data)
       const updatedItemIndex = listItems.findIndex(item => item._id === isUpdating);
       const updatedItem = listItems[updatedItemIndex].item = updateItemText;
